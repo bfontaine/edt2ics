@@ -1,0 +1,8 @@
+*~
+*.tgz
+.*.sw*
+.DS_Store
+__pycache__
+*.pyc
+/venv
+/TODO
