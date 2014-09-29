@@ -12,6 +12,8 @@ import re
 from urllib2 import urlopen
 from urlparse import urljoin
 
+from events import ScheduleEvent
+
 HOST = 'http://localhost:2201'
 PATH_FMT = '/~ufr/UFR2014-2015/EDT/visualiserEmploiDuTemps.php?' \
            'quoi={year},{semester}'
@@ -21,28 +23,6 @@ RE_DESC = re.compile(
     r'(?P<time>\d{1,2}h(?:\d{2})?)\s+\(dur.e\s+:\s+' \
     r'(?P<duration>\dh(?:\d{2})?)\)')
 RE_ROOM = re.compile(r'^\d') # detect a room number
-
-
-class ScheduleEvent(object):
-    """
-    A schedule event
-    """
-
-    def __init__(self, **kwargs):
-        """
-        Attributes: color, title, type_, day, tstart, tend, duration, room,
-        prof.
-        """
-        for k, v in kwargs.items():
-            setattr(self, k, v)
-
-
-    def overlap(self, other):
-        """
-        Check if this event overlaps another one
-        """
-        return other and self.tend > other.tstart and self.tstart < other.tend
-
 
 
 class ScheduleScraper(object):
