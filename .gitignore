@@ -7,3 +7,5 @@ __pycache__
 *.ics
 /venv
 /TODO
+*.egg-info
+/dist

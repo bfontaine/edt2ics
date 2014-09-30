@@ -25,6 +25,9 @@ setup(
     description='Paris Diderot CS dep. iCalendar schedule converter',
     long_description=open('README.rst', 'r').read(),
     install_requires=[
+        'beautifulsoup4 >= 4.3.2',
+        'icalendar >= 3.8.3',
+        'lxml >= 3.4.0',
         'argparse >= 1.1',
     ],
     classifiers=[

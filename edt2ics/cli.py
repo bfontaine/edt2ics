@@ -4,7 +4,7 @@
 import argparse
 import sys
 
-import ScheduleScraper, iCalSchedule
+from edt2ics import ScheduleScraper, iCalSchedule
 
 
 def write_ical(ical, output):
