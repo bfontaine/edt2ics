@@ -14,7 +14,7 @@ from urlparse import urljoin
 
 from events import ScheduleEvent
 
-HOST = 'http://localhost:2201'
+HOST = 'magma.informatique.univ-paris-diderot.fr:2201'
 PATH_FMT = '/~ufr/UFR{period}/EDT/visualiserEmploiDuTemps.php?' \
            'quoi={year},{semester}'
 
@@ -49,7 +49,7 @@ class ScheduleScraper(object):
             period = self._guess_period()
 
         path = PATH_FMT.format(year=year, semester=semester, period=period)
-        self.url = urljoin(HOST, path)
+        self.url = urljoin('http://%s' % host, path)
         self._fetch()
         self.year = year
         self.semester = semester
