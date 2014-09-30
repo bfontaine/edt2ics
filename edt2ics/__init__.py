@@ -4,5 +4,7 @@
 from ical import iCalSchedule
 from scraper import ScheduleScraper
 
+__version__ = '0.1.0'
+
 # silent pyflakes
 iCalSchedule, ScheduleScraper

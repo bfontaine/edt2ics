@@ -1,9 +1,10 @@
-#! venv/bin/python
+#! /usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 import argparse
-from edt2ics import ScheduleScraper, iCalSchedule
 import sys
+
+import ScheduleScraper, iCalSchedule
 
 
 def write_ical(ical, output):
@@ -30,7 +31,3 @@ def main():
 
     output = args.output if args.output is not None else '%s.ics' % args.year
     write_ical(ics.to_ical(), output)
-
-
-if __name__ == '__main__':
-    main()

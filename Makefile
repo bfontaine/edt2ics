@@ -33,3 +33,6 @@ covercheck:
 coverhtml:
 	@make COVERAGE_REPORT=html covercheck
 	@echo '--> open htmlcov/index.html'
+
+publish: deps
+	$(BINUTILS)/python setup.py sdist upload
