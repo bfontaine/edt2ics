@@ -5,10 +5,9 @@ try:
 except ImportError:
     import unittest
 
-from edt2ics.scraper import ScheduleScraper
+from helpers import noop
 
-def noop(*args, **kwargs):
-    pass
+from edt2ics.scraper import ScheduleScraper
 
 class TestScraper(unittest.TestCase):
 
