@@ -7,7 +7,7 @@ Computer Science departement website.
 """
 
 from bs4 import BeautifulSoup
-from datetime import time, timedelta
+from datetime import date, time, timedelta
 import re
 from urllib2 import urlopen
 from urlparse import urljoin
@@ -39,20 +39,37 @@ class ScheduleScraper(object):
     DAYS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
 
 
-    def __init__(self, year, semester=1, period='2014-2015', host=HOST):
+    def __init__(self, year, semester=1, period=None, host=HOST):
         """
         - year: L3, M1 or M2
         - semester: 1 or 2
-        - period: 2014-2015
+        - period: '2013-2014', '2014-2015', etc
         """
+        if period is None:
+            period = self._guess_period()
+
         path = PATH_FMT.format(year=year, semester=semester, period=period)
         self.url = urljoin(HOST, path)
         self._fetch()
 
 
     def _fetch(self):
+        """
+        Fetch the remote page
+        """
         stream = urlopen(self.url)
         self._soup = BeautifulSoup(stream, 'lxml')
+
+
+    def _guess_period(self):
+        """
+        Guess a period (e.g. '2014-2015') from the current date
+        """
+        today = date.today()
+        year = today.year
+        if today.month < 7:
+            year -= 1
+        return '%04d-%04d' % (year, year+1)
 
 
     def get_events(self):
@@ -130,4 +147,7 @@ class ScheduleScraper(object):
         """
         Parse an event type
         """
-        return re.sub(RE_YEAR_SUFFIX, '', type_.strip()).capitalize()
+        type_ = re.sub(RE_YEAR_SUFFIX, '', type_.strip())
+        if len(type_) == 2:
+            return type_.upper()
+        return type_.capitalize()
