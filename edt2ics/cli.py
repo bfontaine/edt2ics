@@ -26,8 +26,11 @@ def main():
             help='output file')
     args = parser.parse_args()
 
-    s = ScheduleScraper(**vars(args))
-    ics = iCalSchedule(s)
+    try:
+        s = ScheduleScraper(**vars(args))
+        ics = iCalSchedule(s)
 
-    output = args.output if args.output is not None else '%s.ics' % args.year
-    write_ical(ics.to_ical(), output)
+        output = args.output if args.output else '%s.ics' % args.year
+        write_ical(ics.to_ical(), output)
+    except KeyboardInterrupt:
+        pass
