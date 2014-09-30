@@ -29,7 +29,7 @@ RE_DESC = re.compile(
     """,
     re.VERBOSE)
 RE_ROOM = re.compile(r'^\d') # detect a room number
-
+RE_YEAR_SUFFIX = re.compile(r'_[ML][1-3]$')
 
 class ScheduleScraper(object):
     """
@@ -86,7 +86,7 @@ class ScheduleScraper(object):
             kw = {
                 'color': td.attrs.get('bgcolor'),
                 'title': info.group('title'),
-                'type_': info.group('type'),
+                'type_': self.parse_type(info.group('type')),
                 'day': self.parse_day(info.group('day')),
                 'tstart': tstart,
                 'tend': tend,
@@ -124,3 +124,10 @@ class ScheduleScraper(object):
         """
         h, m = self._parse_hm(title)
         return time(h, m)
+
+
+    def parse_type(self, type_):
+        """
+        Parse an event type
+        """
+        return re.sub(RE_YEAR_SUFFIX, '', type_.strip()).capitalize()
