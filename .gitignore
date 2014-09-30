@@ -9,3 +9,5 @@ __pycache__
 /TODO
 *.egg-info
 /dist
+/htmlcov
+.coverage
