@@ -354,3 +354,10 @@ footer p + p {
     content: 'at http://github.com/';
   }
 }
+
+/* custom */
+
+ul.downloads {
+  list-style-type: none;
+  padding-left: 5px;
+}
