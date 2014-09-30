@@ -41,7 +41,7 @@ class ScheduleScraper(object):
 
     def __init__(self, year, semester=1, period=None, host=HOST):
         """
-        - year: L3, M1 or M2
+        - year: L1, L2, L3, M1 or M2
         - semester: 1 or 2
         - period: '2013-2014', '2014-2015', etc
         """
@@ -51,6 +51,9 @@ class ScheduleScraper(object):
         path = PATH_FMT.format(year=year, semester=semester, period=period)
         self.url = urljoin(HOST, path)
         self._fetch()
+        self.year = year
+        self.semester = semester
+        self.period = period
 
 
     def _fetch(self):
