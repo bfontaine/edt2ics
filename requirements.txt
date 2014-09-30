@@ -6,4 +6,3 @@ py==1.4.25
 pytz==2014.7
 tox==1.8.0
 virtualenv==1.11.6
-wsgiref==0.1.2
