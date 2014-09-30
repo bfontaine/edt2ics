@@ -35,7 +35,7 @@ class iCalSchedule(object):
 
     def add_event(self, ev):
         dtstart = datetime.combine(self.startdate, ev.tstart)
-        dtend = datetime.combine(self.enddate, ev.tend)
+        dtend = datetime.combine(self.startdate, ev.tend)
 
         iev = Event()
         iev.add('uid', str(uuid4()))
@@ -43,7 +43,8 @@ class iCalSchedule(object):
         iev.add('dtend', dtend)
         iev.add('rrule', vRecur(self._recur_params(ev.day)))
         iev.add('summary', '%s %s' % (ev.type_, ev.title))
-        # TODO description/location/etc
+        iev.add('location', ev.room)
+        iev.add('description', ev.prof)
         self.cal.add_component(iev)
 
 
