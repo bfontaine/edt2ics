@@ -3,17 +3,17 @@
 SRC=edt2ics
 
 VENV=./venv
-BINUTILS=$(VENV)/bin
+BINPREFIX=$(VENV)/bin/
 
-PIP=$(BINUTILS)/pip
+PIP=$(BINPREFIX)pip
 
 COVERFILE:=.coverage
 COVERAGE_REPORT:=report -m
 
 all: run
 
-deps: $(VENV)
-	$(BINUTILS)/pip install -qr requirements.txt
+deps:
+	$(BINPREFIX)pip install -qr requirements.txt
 
 freeze: $(VENV)
 	$(PIP) freeze >| requirements.txt
@@ -24,18 +24,18 @@ $(VENV):
 # Tests
 
 check:
-	$(BINUTILS)/python tests/test.py
+	$(BINPREFIX)python tests/test.py
 
 check-versions:
-	$(BINUTILS)/tox
+	$(BINPREFIX)tox
 
 covercheck:
-	$(BINUTILS)/coverage run --source=$(SRC) tests/test.py
-	$(BINUTILS)/coverage $(COVERAGE_REPORT)
+	$(BINPREFIX)coverage run --source=$(SRC) tests/test.py
+	$(BINPREFIX)coverage $(COVERAGE_REPORT)
 
 coverhtml:
-	@make COVERAGE_REPORT=html covercheck
+	@make COVERAGE_REPORT=html BINPREFIX=$(BINPREFIX) covercheck
 	@echo '--> open htmlcov/index.html'
 
 publish: deps check-versions
-	$(BINUTILS)/python setup.py sdist upload
+	$(BINPREFIX)python setup.py sdist upload
