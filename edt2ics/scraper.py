@@ -39,7 +39,7 @@ class ScheduleScraper(object):
     DAYS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
 
 
-    def __init__(self, year, semester=1, period=None, host=HOST):
+    def __init__(self, year, semester=1, period=None, host=HOST, **kwargs):
         """
         - year: L1, L2, L3, M1 or M2
         - semester: 1 or 2
