@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+from __future__ import print_function
+
 import argparse
 import sys
 
@@ -11,7 +13,7 @@ def write_ical(ical, output):
     if output == '-':
         sys.stdout.write(ical)
     else:
-        with open(output, 'wb') as f:
+        with open(output, 'w') as f:
             f.write(ical)
 
 
@@ -32,5 +34,6 @@ def main():
 
         output = args.output if args.output else '%s.ics' % args.year
         write_ical(ics.to_ical(), output)
+        print('--> %s' % output)
     except KeyboardInterrupt:
         pass

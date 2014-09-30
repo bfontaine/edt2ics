@@ -41,7 +41,7 @@ class TestCli(unittest.TestCase):
 
         write_ical(s, filename)
 
-        with open(filename, 'rb') as f:
+        with open(filename, 'r') as f:
             self.assertEquals(s, f.read())
 
         remove(filename)
