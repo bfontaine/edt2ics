@@ -42,6 +42,8 @@ class iCalSchedule(object):
         iev.add('dtstart', dtstart)
         iev.add('dtend', dtend)
         iev.add('rrule', vRecur(self._recur_params(ev.day)))
+        iev.add('summary', '%s %s' % (ev.type_, ev.title))
+        # TODO description/location/etc
         self.cal.add_component(iev)
 
 
