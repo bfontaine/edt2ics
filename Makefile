@@ -13,7 +13,7 @@ COVERAGE_REPORT:=report -m
 all: run
 
 deps:
-	$(BINPREFIX)pip install -qr requirements.txt
+	$(BINPREFIX)pip install -r requirements.txt
 
 freeze: $(VENV)
 	$(PIP) freeze >| requirements.txt
