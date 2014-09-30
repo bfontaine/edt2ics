@@ -84,11 +84,13 @@ class iCalSchedule(object):
         dtstart = datetime.combine(day, ev.tstart)
         dtend = datetime.combine(day, ev.tend)
 
+        tz_params = {'tzid': 'Europe/Paris'}
+
         iev = Event()
         iev.add('uid', str(uuid4()))
         iev.add('status', 'confirmed')
-        iev.add('dtstart', dtstart)
-        iev.add('dtend', dtend)
+        iev.add('dtstart', dtstart, parameters=tz_params)
+        iev.add('dtend', dtend, parameters=tz_params)
         iev.add('rrule', vRecur(self._recur_params(ev.day)))
         iev.add('summary', '%s %s' % (ev.type_, ev.title))
         iev.add('location', ev.room)
