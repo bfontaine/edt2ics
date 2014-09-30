@@ -24,7 +24,8 @@ class iCalSchedule(object):
                 enddate = dte
 
         self.startdate = startdate
-        self.enddate = enddate
+        # The 'DTEND' property is exclusive, we then must end one day later
+        self.enddate = enddate + timedelta(days=1)
         self._first_weekdays = {} # cache
         self._init_ical()
         if scraper is not None:
