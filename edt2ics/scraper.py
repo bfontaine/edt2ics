@@ -45,7 +45,7 @@ class ScheduleScraper(object):
     DAYS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
 
 
-    def __init__(self, year, semester=1, period=None, host=HOST, **kwargs):
+    def __init__(self, year, semester=1, period=None, host=None, **kwargs):
         """
         - year: L1, L2, L3, M1 or M2
         - semester: 1 or 2
@@ -53,6 +53,9 @@ class ScheduleScraper(object):
         """
         if period is None:
             period = self._guess_period()
+
+        if host is None:
+            host = HOST
 
         path = PATH_FMT.format(year=year, semester=semester, period=period)
         self.url = urljoin('http://%s' % host, path)
