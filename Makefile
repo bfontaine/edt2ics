@@ -26,6 +26,9 @@ $(VENV):
 check:
 	$(BINUTILS)/python tests/test.py
 
+check-versions:
+	$(BINUTILS)/tox
+
 covercheck:
 	$(BINUTILS)/coverage run --source=$(SRC) tests/test.py
 	$(BINUTILS)/coverage $(COVERAGE_REPORT)
@@ -34,5 +37,5 @@ coverhtml:
 	@make COVERAGE_REPORT=html covercheck
 	@echo '--> open htmlcov/index.html'
 
-publish: deps
+publish: deps check-versions
 	$(BINUTILS)/python setup.py sdist upload

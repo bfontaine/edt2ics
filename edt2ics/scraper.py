@@ -9,10 +9,16 @@ Computer Science departement website.
 from bs4 import BeautifulSoup
 from datetime import date, time, timedelta
 import re
-from urllib2 import urlopen
-from urlparse import urljoin
 
-from events import ScheduleEvent
+try:
+    from urllib2 import urlopen
+    from urlparse import urljoin
+except ImportError:
+    from urllib.request import urlopen
+    from urllib.parse import urljoin
+
+
+from edt2ics.events import ScheduleEvent
 
 HOST = 'magma.informatique.univ-paris-diderot.fr:2201'
 PATH_FMT = '/~ufr/UFR{period}/EDT/visualiserEmploiDuTemps.php?' \
