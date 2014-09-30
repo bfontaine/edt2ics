@@ -15,13 +15,19 @@ from urlparse import urljoin
 from events import ScheduleEvent
 
 HOST = 'http://localhost:2201'
-PATH_FMT = '/~ufr/UFR2014-2015/EDT/visualiserEmploiDuTemps.php?' \
+PATH_FMT = '/~ufr/UFR{period}/EDT/visualiserEmploiDuTemps.php?' \
            'quoi={year},{semester}'
 
 RE_DESC = re.compile(
-    r'(?P<type>[-\w]+)\s+(?P<title>.+)\s+:\s+(?P<day>[a-z]+di)\s+' \
-    r'(?P<time>\d{1,2}h(?:\d{2})?)\s+\(dur.e\s+:\s+' \
-    r'(?P<duration>\dh(?:\d{2})?)\)')
+    r"""
+    (?P<type>[-\w]+)\s+             # COURS, TP_M2, etc
+    (?P<title>.+)\s+:\s+            # course name :
+    (?P<day>[a-z]+di)\s+            # {lun,mar,...}di (day)
+    (?P<time>\d{1,2}h(?:\d{2})?)\s+ # 12h30
+    \(dur.e\s+:\s+                  # (durée :
+    (?P<duration>\dh(?:\d{2})?)\)   #  2h30)
+    """,
+    re.VERBOSE)
 RE_ROOM = re.compile(r'^\d') # detect a room number
 
 
@@ -33,17 +39,18 @@ class ScheduleScraper(object):
     DAYS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
 
 
-    def __init__(self, year, semester=1, host=HOST):
+    def __init__(self, year, semester=1, period='2014-2015', host=HOST):
         """
         - year: L3, M1 or M2
         - semester: 1 or 2
+        - period: 2014-2015
         """
-        path = PATH_FMT.format(year=year, semester=semester)
+        path = PATH_FMT.format(year=year, semester=semester, period=period)
         self.url = urljoin(HOST, path)
-        self.fetch()
+        self._fetch()
 
 
-    def fetch(self):
+    def _fetch(self):
         stream = urlopen(self.url)
         self._soup = BeautifulSoup(stream, 'lxml')
 
@@ -102,6 +109,9 @@ class ScheduleScraper(object):
 
 
     def _parse_hm(self, text):
+        """
+        Parse a time given as '<hh>h[<mm>]' and return a tuple
+        """
         t = text.split('h')
         h = int(t[0])
         m = int(t[1] or '0')
@@ -109,5 +119,8 @@ class ScheduleScraper(object):
 
 
     def parse_time(self, title):
+        """
+        Parse a time and return a ``time`` object.
+        """
         h, m = self._parse_hm(title)
         return time(h, m)
