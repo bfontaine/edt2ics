@@ -26,13 +26,15 @@ def main():
             help='remote host')
     parser.add_argument('--output', dest='output', type=str, default=None,
             help='output file')
-    args = parser.parse_args()
+    args = vars(parser.parse_args())
+
+    args['year'] = args['year'].upper()
 
     try:
-        s = ScheduleScraper(**vars(args))
+        s = ScheduleScraper(**args)
         ics = iCalSchedule(s)
 
-        output = args.output if args.output else '%s.ics' % args.year
+        output = args['output'] if args['output'] else '%s.ics' % args['year']
         write_ical(ics.to_ical(), output)
         print('--> %s' % output)
     except KeyboardInterrupt:

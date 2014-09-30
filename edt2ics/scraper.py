@@ -91,8 +91,8 @@ class ScheduleScraper(object):
         for td in self._soup.select('td[title]'):
             desc = td.attrs.get('title')
 
-            profs = td.select('small')
-            prof = profs[0].get_text().strip() if profs else None
+            descs = td.select('small')
+            desc = descs[0].get_text().strip() if descs else None
 
             for s in td.strings:
                 s = s.strip()
@@ -121,7 +121,7 @@ class ScheduleScraper(object):
                 'tend': tend,
                 'duration': timedelta(hours=h, minutes=m),
                 'room': room,
-                'prof': prof,
+                'description': desc,
             }
 
             yield ScheduleEvent(**kw)

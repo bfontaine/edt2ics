@@ -91,7 +91,7 @@ class iCalSchedule(object):
         iev.add('rrule', vRecur(self._recur_params(ev.day)))
         iev.add('summary', '%s %s' % (ev.type_, ev.title))
         iev.add('location', ev.room)
-        iev.add('description', ev.prof)
+        iev.add('description', ev.description)
         self.cal.add_component(iev)
 
 
