@@ -30,6 +30,7 @@ setup(
         'lxml >= 3.4.0',
         'argparse >= 1.1',
     ],
+    include_package_data=True,
     classifiers=[
         'Environment :: Console',
         'License :: OSI Approved :: MIT License',
