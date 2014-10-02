@@ -73,11 +73,12 @@ class ScheduleScraper(object):
         self._soup = BeautifulSoup(stream, 'lxml')
 
 
-    def _guess_period(self):
+    def _guess_period(self, today=None):
         """
         Guess a period (e.g. '2014-2015') from the current date
         """
-        today = date.today()
+        if today is None:
+            today = date.today()
         year = today.year
         if today.month < 7:
             year -= 1

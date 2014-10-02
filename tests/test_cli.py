@@ -18,9 +18,11 @@ class TestCli(unittest.TestCase):
     def setUp(self):
         self.real_stdout = sys.stdout
         self.stdout = sys.stdout = StringIO()
+        self.argv = sys.argv
 
     def tearDown(self):
         sys.stdout = self.real_stdout
+        sys.argv = self.argv
 
     # write_ical
 
