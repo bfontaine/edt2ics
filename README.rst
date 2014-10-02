@@ -25,3 +25,9 @@ Usage
     edt2ics <year>
 
 Where ``year`` is one of: ``L3``, ``M1``, ``M2``.
+
+
+Support
+-------
+
+Python 2.6, 2.7 and 3.3+.
