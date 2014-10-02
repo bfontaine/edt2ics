@@ -13,7 +13,7 @@ class iCalSchedule(object):
 
     DAYS = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU']
 
-    def __init__(self, scraper=None, startdate=None, enddate=None):
+    def __init__(self, scraper, startdate=None, enddate=None):
         if startdate is None or enddate is None:
             dts, dte = self._get_dates(scraper.period, scraper.year,
                     scraper.semester)
@@ -28,9 +28,8 @@ class iCalSchedule(object):
         self.enddate = enddate + timedelta(days=1)
         self._first_weekdays = {} # cache
         self._init_ical()
-        if scraper is not None:
-            for ev in scraper.get_events():
-                self.add_event(ev)
+        for ev in scraper.get_events():
+            self.add_event(ev)
 
 
     def _init_ical(self):
