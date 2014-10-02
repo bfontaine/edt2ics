@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>edt2ics par bfontaine</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>edt2ics</h1>
+        <p>Convertissez les emplois du temps HTML du site de l’UFR
+        Informatique de Paris Diderot vers des fichiers iCalendar.</p>
+        <p class="view"><a href="https://github.com/bfontaine/edt2ics">Voir le projet sur GitHub <small>bfontaine/edt2ics</small></a></p>
+        <ul>
+          <li><a href="https://github.com/bfontaine/edt2ics">Voir sur <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+
+        <p><code>edt2ics</code> est une bibliothèque et outil en ligne de
+        commande pour les étudiants en informatique à Paris Diderot pour
+        générer des <a href="#h-downloads">fichiers iCalendar</a> depuis les
+        emplois du temps en ligne</p>
+
+        <p>iCalendar est un format standard pour les données de calendrier,
+        supporté par <a href="https://en.wikipedia.org/wiki/List_of_applications_with_iCalendar_support">une multitude d’applications</a>.
+        Ce format vous permet d’avoir votre emploi du temps directement dans le
+        calendrier de votre téléphone, par exemple.</p>
+
+        <h2 id="h-downloads">Téléchargements</h2>
+
+        <p>Certains fichiers iCalendar sont disponibles sur cette page&nbsp;:</p>
+
+        <h3>2014/2015</h3>
+
+        <h4>L1</h4>
+
+        <p><i>Bientôt…</i></p>
+
+        <h4>L2</h4>
+
+        <p><i>Bientôt…</i></p>
+
+        <h4>L3</h4>
+
+        <ul class="downloads">
+          <li><a href="./ics/L3-S1.ics">Semestre 1</a></li>
+        </ul>
+
+        <h4>M1</h4>
+
+        <ul class="downloads">
+          <li><a href="./ics/M1-S1.ics">Semestre 1</a></li>
+        </ul>
+
+        <h4>M2</h4>
+
+        <ul class="downloads">
+          <li><a href="./ics/M2-S1.ics">Période 1</a></li>
+        </ul>
+
+        <h2 id="h-demo">Démo</h2>
+
+        <h3>Avant:</h3>
+
+        <figure>
+          <img src="./images/html.png" alt="version HTML" />
+          <figcaption>Version en ligne</figcaption>
+        </figure>
+
+        <h3>Après:</h3>
+
+        <figure>
+          <img src="./images/ical.png" alt="version iCalendar" />
+          <figcaption>Un exemple dans le Calendrier Apple</figcaption>
+        </figure>
+
+        <h2 id="h-install">Installation</h2>
+
+        <pre><code>pip install p7edt2ics</code></pre>
+
+        <h2 id="h-usage">Usage</h2>
+
+        <pre><code>edt2ics &lt;year&gt;</code></pre>
+
+        <p>Où <code>year</code> est: <code>L3</code>, <code>M1</code>, ou <code>M2</code>.</p>
+
+        <hr/>
+
+        <p>Les emplois du temps sont exportés tels qu’ils apparaissent sur le
+        site, c’est à vous de supprimer les cours en trop dans votre
+        application de calendrier.</p>
+        <p>Vous avez trouvé un bug? <a href="https://github.com/bfontaine/edt2ics/issues/new">Signalez-le</a>&nbsp;!
+        Envie de contribuer ? <code>edt2ics</code> est écrit en Python et son
+        code est ouvert sur <a href="https://github.com/bfontaine/edt2ics">GitHub</a>.</p>
+
+      </section>
+    </div>
+    <footer>
+      <p>Project maintenu par <a href="https://github.com/bfontaine">bfontaine</a></p>
+      <p>Hébergé sur GitHub Pages &mdash; Thème par <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>
