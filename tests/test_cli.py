@@ -11,7 +11,11 @@ except ImportError:
     from io import StringIO
     import unittest
 
-from edt2ics.cli import write_ical, main
+from edt2ics.cli import write_ical, main, ScheduleScraper
+
+def ctrlC(self, *args, **kwargs):
+    raise KeyboardInterrupt
+
 
 class TestCli(unittest.TestCase):
 
@@ -19,10 +23,19 @@ class TestCli(unittest.TestCase):
         self.real_stdout = sys.stdout
         self.stdout = sys.stdout = StringIO()
         self.argv = sys.argv
+        self.sys_exit = sys.exit
+        self.exit_code = None
+        self.ss_init = ScheduleScraper.__init__
+        def _fake_exit(code=None):
+            self.exit_code = code
+        _fake_exit.__name__ = sys.exit.__name__
+        sys.exit = _fake_exit
 
     def tearDown(self):
         sys.stdout = self.real_stdout
         sys.argv = self.argv
+        sys.exit = self.sys_exit
+        ScheduleScraper.__init__ = self.ss_init
 
     # write_ical
 
@@ -50,4 +63,10 @@ class TestCli(unittest.TestCase):
 
 
     # main
-    # TODO
+
+    def test_main_abort_on_interrupt(self):
+        ScheduleScraper.__init__ = ctrlC
+        sys.argv = ['edt2ics', 'M2']
+        self.assertEquals(None, self.exit_code)
+        main()
+        self.assertEquals(1, self.exit_code)
