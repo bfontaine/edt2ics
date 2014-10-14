@@ -38,4 +38,4 @@ def main():
         write_ical(ics.to_ical(), output)
         print('--> %s' % output)
     except KeyboardInterrupt:
-        pass
+        return sys.exit(1)
