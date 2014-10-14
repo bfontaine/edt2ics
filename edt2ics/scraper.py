@@ -111,7 +111,7 @@ class ScheduleScraper(object):
             tstart = self.parse_time(info.group('time'))
             h, m = self._parse_hm(info.group('duration'))
             endminutes = (tstart.hour + h) * 60 + tstart.minute + m
-            tend = time(endminutes / 60, endminutes % 60)
+            tend = time(int(endminutes / 60), endminutes % 60)
 
             kw = {
                 'color': td.attrs.get('bgcolor'),
