@@ -16,15 +16,18 @@ Install
 -------
 
 .. code-block::
+
     pip install p7edt2ics
 
 Usage
 -----
 
 .. code-block::
-    edt2ics <year>
 
-Where ``year`` is one of: ``L3``, ``M1``, ``M2``.
+    edt2ics [--semester <semester>] <year>
+
+Where ``year`` is one of: ``L3``, ``M1``, ``M2`` and ``semester`` is ``1`` or
+``2``.
 
 
 Support
